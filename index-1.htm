@@ -9445,25 +9445,24 @@
                 } catch(e) {}
               }
               
-              var wishHtml = `
-                <li class="saic-item-comment" style="padding: 12px 15px !important; border-bottom: 1px dashed #e2e8f0; list-style: none;">
-                  <div class="saic-comment-content" style="margin-left: 0 !important; padding-left: 0 !important;">
-                    <div class="saic-comment-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span class="saic-commenter-name" style="font-weight: bold; color: #586E51; font-size: 0.95em;">
-                        ${escapeHtml(item.nama)} ${badgeHtml}
-                      </span>
-                      <span class="saic-comment-time" style="font-size: 0.75em; color: #9DA8B7; font-style: italic;">
-                        ${dateStr}
-                      </span>
-                    </div>
-                    <div class="saic-comment-text">
-                      <p style="color: #4A5568; font-size: 0.9em; line-height: 1.5; margin: 0 !important;">
-                        ${escapeHtml(item.ucapan)}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              `;
+              var wishHtml = 
+                '<li class="saic-item-comment" style="padding: 12px 15px !important; border-bottom: 1px dashed #e2e8f0; list-style: none;">' +
+                  '<div class="saic-comment-content" style="margin-left: 0 !important; padding-left: 0 !important;">' +
+                    '<div class="saic-comment-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">' +
+                      '<span class="saic-commenter-name" style="font-weight: bold; color: #586E51; font-size: 0.95em;">' +
+                        escapeHtml(item.nama) + ' ' + badgeHtml +
+                      '</span>' +
+                      '<span class="saic-comment-time" style="font-size: 0.75em; color: #9DA8B7; font-style: italic;">' +
+                        dateStr +
+                      '</span>' +
+                    '</div>' +
+                    '<div class="saic-comment-text">' +
+                      '<p style="color: #4A5568; font-size: 0.9em; line-height: 1.5; margin: 0 !important;">' +
+                        escapeHtml(item.ucapan) +
+                      '</p>' +
+                    '</div>' +
+                  '</div>' +
+                '</li>';
               wishesList.append(wishHtml);
             });
           })
