@@ -5235,12 +5235,13 @@
                               padding-top: 0;
                               height: 0;
                             }
-                            .videoWrapper iframe {
+                            .videoWrapper video {
                               position: absolute;
                               top: 0;
                               left: 0;
                               width: 100%;
                               height: 100%;
+                              object-fit: cover;
                             }
                           </style>
                           <script
@@ -5248,102 +5249,34 @@
                             src="wp-content/litespeed/js/e16fc868b425493343f7a724127ac6ba.js?ver=ac6ba"
                           ></script>
                           <div class="videoWrapper">
-                            <div id="video-yt"></div>
+                            <video id="video-local" src="videogaleri.mp4" muted autoplay loop playsinline controls></video>
                           </div>
                           <script>
-                            var player,
-                              playing = !1;
-                            function onYouTubeIframeAPIReady() {
-                              var url =
-                                "https://www.youtube.com/watch?v=2hyN1_2qHCU";
-                              if (isGoogleDrive(url)) {
-                                var driveEmbed = getDriveEmbed(url);
-                                document.getElementById("video-yt").innerHTML =
-                                  '<iframe src="' +
-                                  driveEmbed +
-                                  '" ' +
-                                  'style="width:100%;height:100%;border:0;" allow="autoplay" allowfullscreen></iframe>';
-                                return;
-                              }
-                              var videoId = extractVideoId(url);
-                              player = new YT.Player("video-yt", {
-                                height: "360",
-                                width: "640",
-                                videoId: videoId,
-                                playerVars: {
-                                  autoplay: 1,
-                                  mute: 1,
-                                  loop: 1,
-                                  playlist: videoId,
-                                },
-                                events: { onStateChange: onPlayerStateChange },
-                              });
-                              let muteBtn =
-                                document.getElementById("mute-button");
-                              if (muteBtn) {
-                                muteBtn.addEventListener("click", function () {
-                                  toggleMute();
+                            document.addEventListener('DOMContentLoaded', () => {
+                              const video = document.getElementById('video-local');
+                              if (video) {
+                                // Toggle play/pause on click
+                                video.addEventListener('click', () => {
+                                  if (video.paused) {
+                                    video.play();
+                                  } else {
+                                    video.pause();
+                                  }
                                 });
+
+                                // Handle audio play/pause interaction with background music
+                                const handleAudioInteraction = () => {
+                                  if (!video.paused && !video.muted) {
+                                    if (typeof pauseAudio === 'function') pauseAudio();
+                                  } else {
+                                    if (typeof playAudio === 'function') playAudio();
+                                  }
+                                };
+                                video.addEventListener('play', handleAudioInteraction);
+                                video.addEventListener('pause', handleAudioInteraction);
+                                video.addEventListener('volumechange', handleAudioInteraction);
                               }
-                            }
-                            function isGoogleDrive(url) {
-                              return url.includes("drive.google.com");
-                            }
-                            function getDriveEmbed(url) {
-                              let match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                              if (match && match[1]) {
-                                return (
-                                  "https://drive.google.com/file/d/" +
-                                  match[1] +
-                                  "/preview"
-                                );
-                              }
-                              return url;
-                            }
-                            function extractVideoId(url) {
-                              let watch = url.match(/v=([^&]+)/);
-                              if (watch && watch[1]) return watch[1];
-                              let shortUrl = url.match(/youtu\.be\/([^?&]+)/);
-                              if (shortUrl && shortUrl[1]) return shortUrl[1];
-                              let embed = url.match(/embed\/([^?&]+)/);
-                              if (embed && embed[1]) return embed[1];
-                              let shorts = url.match(/shorts\/([^?&]+)/);
-                              if (shorts && shorts[1]) return shorts[1];
-                              return url;
-                            }
-                            function onPlayerStateChange(event) {
-                              var isMuted = player.isMuted();
-                              if (
-                                event.data == YT.PlayerState.PLAYING &&
-                                !isMuted
-                              ) {
-                                pauseAudio();
-                                audioInactive();
-                                playing = !0;
-                              } else if (
-                                event.data == YT.PlayerState.PAUSED &&
-                                !isMuted
-                              ) {
-                                playAudio();
-                                audioActive();
-                                playing = !1;
-                              } else if (event.data == YT.PlayerState.ENDED) {
-                                player.seekTo(0);
-                                player.playVideo();
-                              }
-                            }
-                            function toggleMute() {
-                              if (!player) return;
-                              if (player.isMuted()) {
-                                player.unMute();
-                                playAudio();
-                                audioActive();
-                              } else {
-                                player.mute();
-                                pauseAudio();
-                                audioInactive();
-                              }
-                            }
+                            });
                           </script>
                         </div>
                       </div>
@@ -5670,6 +5603,60 @@
                                 data-width="1000"
                                 data-height="667"
                                 aria-label="Photo 15"
+                                role="img"
+                              ></div>
+                              <div class="elementor-gallery-item__overlay"></div>
+                            </a>
+
+                            <!-- 16. ENAMBELAS 48.jpeg (Landscape) -->
+                            <a
+                              class="e-gallery-item elementor-gallery-item elementor-animated-content"
+                              href="48.jpeg"
+                              data-elementor-open-lightbox="yes"
+                              data-elementor-lightbox-slideshow="17f5026"
+                              data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Nzg0OCwidXJsIjoiNDguanBlZyIsInNsaWRlc2hvdyI6IjE3ZjUwMjYifQ=="
+                              ><div
+                                class="e-gallery-image elementor-gallery-item__image"
+                                data-thumbnail="48.jpeg"
+                                data-width="1280"
+                                data-height="1000"
+                                aria-label="Photo 16"
+                                role="img"
+                              ></div>
+                              <div class="elementor-gallery-item__overlay"></div>
+                            </a>
+
+                            <!-- 17. TUJUHBELAS 49.jpeg (Portrait) -->
+                            <a
+                              class="e-gallery-item elementor-gallery-item elementor-animated-content"
+                              href="49.jpeg"
+                              data-elementor-open-lightbox="yes"
+                              data-elementor-lightbox-slideshow="17f5026"
+                              data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Nzg0OSwidXJsIjoiNDkuanBlZyIsInNsaWRlc2hvdyI6IjE3ZjUwMjYifQ=="
+                              ><div
+                                class="e-gallery-image elementor-gallery-item__image"
+                                data-thumbnail="49.jpeg"
+                                data-width="836"
+                                data-height="1280"
+                                aria-label="Photo 17"
+                                role="img"
+                              ></div>
+                              <div class="elementor-gallery-item__overlay"></div>
+                            </a>
+
+                            <!-- 18. DELAPANBELAS 50.jpeg (Portrait) -->
+                            <a
+                              class="e-gallery-item elementor-gallery-item elementor-animated-content"
+                              href="50.jpeg"
+                              data-elementor-open-lightbox="yes"
+                              data-elementor-lightbox-slideshow="17f5026"
+                              data-e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6Nzg1MCwidXJsIjoiNTAuanBlZyIsInNsaWRlc2hvdyI6IjE3ZjUwMjYifQ=="
+                              ><div
+                                class="e-gallery-image elementor-gallery-item__image"
+                                data-thumbnail="50.jpeg"
+                                data-width="914"
+                                data-height="1280"
+                                aria-label="Photo 18"
                                 role="img"
                               ></div>
                               <div class="elementor-gallery-item__overlay"></div>
